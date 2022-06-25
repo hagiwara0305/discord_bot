@@ -1,0 +1,17 @@
+version: '3'
+services:
+  python3:
+    restart: always
+    ports:
+      - 443:443
+    build: .
+    container_name: 'python3'
+    working_dir: '/root/discord_bot'
+    tty: true
+    environment:
+      - AWS_ACCESS_KEY_ID=
+      - AWS_SECRET_ACCESS_KEY=
+      - AWS_DEFAULT_REGION=
+    volumes:
+      - ./opt:/root/opt
+      - ./discord_bot:/root/discord_bot
