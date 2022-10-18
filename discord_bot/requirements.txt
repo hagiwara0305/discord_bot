@@ -1,2 +1,2 @@
-discord
-boto3
+discord==1.7.3
+boto3==1.24.17
