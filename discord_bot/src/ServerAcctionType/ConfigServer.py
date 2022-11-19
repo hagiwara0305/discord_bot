@@ -3,10 +3,13 @@ from src.ServerAcctionType.Sever import Server
 class ConfigServer(Server):
     explanation = '\config\tEC2サーバの状態、起動している場合はIPアドレスを返却します'
 
-    def __init__(self, instance_id=None) -> None:
-        super().__init__(instance_id, self.explanation)
+    def __init__(self, instance_id=None, client=None) -> None:
+        super().__init__(instance_id, self.explanation, client)
 
-    async def action(self):
+    async def action(self, message):
+        channel = message.channel
+        await channel.send('サーバを情報を取得しています...')
+
         instance = super().getInstance()
 
         status = instance.state

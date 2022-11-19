@@ -4,24 +4,24 @@ from src.ServerAcctionType.StartServer import StartServer
 from src.ServerAcctionType.StopServer import StopServer
 
 class ServerManager:
-    def __init__(self, instance_id):
+    def __init__(self, instance_id, client):
         self.instance_id = instance_id
 
         self.serverInterface = {
-            '\start': StartServer(self.instance_id),
-            '\stop': StopServer(self.instance_id),
-            '\config': ConfigServer(self.instance_id)
+            '\start': StartServer(self.instance_id, client),
+            '\stop': StopServer(self.instance_id, client),
+            '\config': ConfigServer(self.instance_id, client)
         }
         self.serverInterface['\list'] = HelpServer(serverInterface=self.serverInterface)
 
 
     async def getMessage(self, message):
-        target_instance = self.serverInterface.get(message)
+        target_instance = self.serverInterface.get(message.content)
 
         if target_instance is None:
             return
 
-        return_message = await target_instance.action()
+        return_message = await target_instance.action(message)
 
         if return_message['status']:
             return {

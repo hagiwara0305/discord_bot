@@ -27,7 +27,7 @@ async def on_message(message):
     print(message.content)
 
     global server
-    return_message = await server.getMessage(message.content)
+    return_message = await server.getMessage(message)
 
     if return_message is None:
         return
@@ -49,7 +49,7 @@ def main():
 
         # サーバマネージャインスタンス生成
         global server
-        server = ServerManager(ec2_instance_id)
+        server = ServerManager(ec2_instance_id, client)
 
     # Botの起動とDiscordサーバーへの接続
     client.run(token)

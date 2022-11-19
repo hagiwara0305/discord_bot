@@ -11,7 +11,7 @@ class HelpServer(Server):
             self.helpExplanationStr += serverInterface[item].getExplanation() + '\n'
         self.helpExplanationStr += self.explanation
 
-    async def action(self):
+    async def action(self, message):
         return {
             'status': True,
             'data': {

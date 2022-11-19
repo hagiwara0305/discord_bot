@@ -12,10 +12,12 @@ class Server:
     # ec2インスタンスオブジェクト
     instance = None
 
-    def __init__(self, instance_id=None, explanation=None) -> None:
+    def __init__(self, instance_id=None, explanation=None, client=None) -> None:
         if instance_id is not None:
             # ターゲットとなるEC2インスタンスID
             self.instance_id = instance_id
+            # Discodeのクライアント
+            self.client = client
 
             # ec2インスタンス起動
             self.setInstance(self.instance_id)

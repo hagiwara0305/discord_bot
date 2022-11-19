@@ -3,10 +3,13 @@ from src.ServerAcctionType.Sever import Server
 class StartServer(Server):
     explanation = '\start\t\tEC2サーバ起動します'
 
-    def __init__(self, instance_id=None) -> None:
-        super().__init__(instance_id, self.explanation)
+    def __init__(self, instance_id=None, client=None) -> None:
+        super().__init__(instance_id, self.explanation, client)
 
-    async def action(self):
+    async def action(self, message):
+        channel = message.channel
+        await channel.send('サーバを起動しています...')
+
         instance = super().getInstance()
 
         print('EC2インスタンス起動開始')
